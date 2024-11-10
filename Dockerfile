@@ -1,23 +1,19 @@
-# Use Node.js LTS version
-FROM node:18-slim
-
-# Create app directory
-WORKDIR /usr/src/app
-
-# Copy package files
+FROM --platform=linux/arm64 node:18-slim AS builder
+WORKDIR /build
 COPY package*.json ./
-
-# Install dependencies
-RUN npm install --production
-
-# Copy app source
+RUN npm install
 COPY . .
 
-# Create configs directory
+# Production stage
+FROM --platform=linux/arm64 node:18-slim
+WORKDIR /usr/src/app
+
+# Copy only production files
+COPY --from=builder /build/package*.json ./
+COPY --from=builder /build/server.js ./
+COPY --from=builder /build/index.html ./
+RUN npm install --production
 RUN mkdir -p configs
 
-# Expose the port
 EXPOSE 3000
-
-# Start the app
 CMD ["node", "server.js"]
