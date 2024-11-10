@@ -1,0 +1,29 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Config Upload</title>
+    <style>
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 800px; 
+            margin: 40px auto; 
+            padding: 20px;
+        }
+        .upload-form {
+            border: 2px dashed #ccc;
+            padding: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="upload-form">
+        <h2>Upload Config File</h2>
+        <form action="/upload" method="post" enctype="multipart/form-data">
+            <input type="file" name="config" accept=".json">
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</body>
+</html>
