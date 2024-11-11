@@ -7,3 +7,4 @@ Dockerfile
 README.md
 docker-compose*
 configs
+.env*
